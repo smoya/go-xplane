@@ -18,10 +18,11 @@ import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
-	"github.com/ornen/go-xplane/messages"
 	"log"
 	"net"
 	"time"
+
+	"github.com/ornen/go-xplane/messages"
 )
 
 const (
@@ -54,7 +55,7 @@ func New(remoteAddress, localAddress string, opts ...Opt) XPlane {
 }
 
 func ReceiveEvery(t time.Duration) Opt {
-	return func( x *XPlane) {
+	return func(x *XPlane) {
 		x.receivePeriod = &t
 	}
 }
@@ -74,8 +75,8 @@ func (x *XPlane) Receive() {
 		t := time.NewTicker(*x.receivePeriod)
 		for {
 			select {
-				case <-t.C:
-					x.readBuf(serverConn, buf)
+			case <-t.C:
+				x.readBuf(serverConn, buf)
 			}
 		}
 	} else {
@@ -85,8 +86,7 @@ func (x *XPlane) Receive() {
 	}
 }
 
-
-func(x *XPlane) readBuf(c *net.UDPConn, b []byte) {
+func (x *XPlane) readBuf(c *net.UDPConn, b []byte) {
 	n, _, _ := c.ReadFromUDP(b)
 	m := (n - datagramPrefixLength) / messageLength
 
