@@ -15,12 +15,16 @@
 package messages
 
 type GearsBrakesMessage struct {
+	Message
 	Gears  float64
 	Brakes float64
 }
 
-func NewGearsBrakesMessage(data []float32) GearsBrakesMessage {
+func NewGearsBrakesMessage(sequence uint64, data []float32) GearsBrakesMessage {
 	return GearsBrakesMessage{
+		Message: Message{
+			sequence: sequence,
+		},
 		Gears:  float64(data[0]),
 		Brakes: float64(data[0]),
 	}

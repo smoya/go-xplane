@@ -15,13 +15,17 @@
 package messages
 
 type GLoadMessage struct {
+	Message
 	X float64
 	Y float64
 	Z float64
 }
 
-func NewGLoadMessage(data []float32) GLoadMessage {
+func NewGLoadMessage(sequence uint64, data []float32) GLoadMessage {
 	return GLoadMessage{
+		Message: Message{
+			sequence: sequence,
+		},
 		X: float64(data[5]) * gravityInMetersPerSecondSecond,
 		Y: float64(data[6]) * gravityInMetersPerSecondSecond,
 		Z: -float64(data[4]) * gravityInMetersPerSecondSecond,

@@ -15,14 +15,18 @@
 package messages
 
 type PitchRollHeadingMessage struct {
+	Message
 	Pitch           float64
 	Roll            float64
 	HeadingTrue     float64
 	HeadingMagnetic float64
 }
 
-func NewPitchRollHeadingMessage(data []float32) PitchRollHeadingMessage {
+func NewPitchRollHeadingMessage(sequence uint64, data []float32) PitchRollHeadingMessage {
 	return PitchRollHeadingMessage{
+		Message: Message{
+			sequence: sequence,
+		},
 		Pitch:           float64(data[0]),
 		Roll:            float64(data[1]),
 		HeadingTrue:     float64(data[2]),

@@ -15,11 +15,15 @@
 package messages
 
 type BatteryAmperageMessage struct {
+	Message
 	Amperage float64
 }
 
-func NewBatteryAmperageMessage(data []float32) BatteryAmperageMessage {
+func NewBatteryAmperageMessage(sequence uint64, data []float32) BatteryAmperageMessage {
 	return BatteryAmperageMessage{
+		Message: Message{
+			sequence: sequence,
+		},
 		Amperage: float64(data[0]),
 	}
 }

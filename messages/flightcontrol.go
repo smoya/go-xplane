@@ -15,13 +15,17 @@
 package messages
 
 type FlightControlMessage struct {
+	Message
 	Elevator float64
 	Aileron  float64
 	Rudder   float64
 }
 
-func NewFlightControlMessage(data []float32) FlightControlMessage {
+func NewFlightControlMessage(sequence uint64, data []float32) FlightControlMessage {
 	return FlightControlMessage{
+		Message: Message{
+			sequence: sequence,
+		},
 		Elevator: float64(data[0]),
 		Aileron:  float64(data[1]),
 		Rudder:   float64(data[2]),

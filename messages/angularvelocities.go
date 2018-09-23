@@ -19,13 +19,17 @@ const (
 )
 
 type AngularVelocitiesMessage struct {
+	Message
 	X float64
 	Y float64
 	Z float64
 }
 
-func NewAngularVelocitiesMessage(data []float32) AngularVelocitiesMessage {
+func NewAngularVelocitiesMessage(sequence uint64, data []float32) AngularVelocitiesMessage {
 	return AngularVelocitiesMessage{
+		Message: Message{
+			sequence: sequence,
+		},
 		X: float64(data[1]),
 		Y: float64(data[0]),
 		Z: float64(data[2]),

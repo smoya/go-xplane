@@ -15,12 +15,16 @@
 package messages
 
 type WeatherMessage struct {
+	Message
 	Pressure    float64
 	Temperature float64
 }
 
-func NewWeatherMessage(data []float32) WeatherMessage {
+func NewWeatherMessage(sequence uint64, data []float32) WeatherMessage {
 	return WeatherMessage{
+		Message: Message{
+			sequence: sequence,
+		},
 		Pressure:    float64(data[0]),
 		Temperature: float64(data[1]),
 	}

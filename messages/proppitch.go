@@ -15,12 +15,16 @@
 package messages
 
 type PropPitchMessage struct {
+	Message
 	MainRotorPitch float64
 	TailRotorPitch float64
 }
 
-func NewPropPitchMessage(data []float32) PropPitchMessage {
+func NewPropPitchMessage(sequence uint64, data []float32) PropPitchMessage {
 	return PropPitchMessage{
+		Message: Message{
+			sequence: sequence,
+		},
 		MainRotorPitch: float64(data[0]),
 		TailRotorPitch: float64(data[1]),
 	}

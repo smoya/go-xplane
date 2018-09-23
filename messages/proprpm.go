@@ -15,11 +15,15 @@
 package messages
 
 type PropRPMMessage struct {
+	Message
 	RPM float64
 }
 
-func NewPropRPMMessage(data []float32) PropRPMMessage {
+func NewPropRPMMessage(sequence uint64, data []float32) PropRPMMessage {
 	return PropRPMMessage{
+		Message: Message{
+			sequence: sequence,
+		},
 		RPM: float64(data[0]),
 	}
 }

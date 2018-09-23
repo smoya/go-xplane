@@ -15,6 +15,7 @@
 package messages
 
 type LatLonAltMessage struct {
+	Message
 	Latitude          float64
 	Longitude         float64
 	AltitudeMSL       float64
@@ -22,8 +23,11 @@ type LatLonAltMessage struct {
 	AltitudeIndicated float64
 }
 
-func NewLatLonAltMessage(data []float32) LatLonAltMessage {
+func NewLatLonAltMessage(sequence uint64, data []float32) LatLonAltMessage {
 	return LatLonAltMessage{
+		Message: Message{
+			sequence: sequence,
+		},
 		Latitude:          float64(data[0]),
 		Longitude:         float64(data[1]),
 		AltitudeMSL:       float64(data[2]) * feetToMeters,

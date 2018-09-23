@@ -15,14 +15,18 @@
 package messages
 
 type TrimFlapsBrakesMessage struct {
+	Message
 	FlapsHandle         float64
 	FlapsPosition       float64
 	SpeedBrakesHandle   float64
 	SpeedBrakesPosition float64
 }
 
-func NewTrimFlapsBrakesMessage(data []float32) TrimFlapsBrakesMessage {
+func NewTrimFlapsBrakesMessage(sequence uint64, data []float32) TrimFlapsBrakesMessage {
 	return TrimFlapsBrakesMessage{
+		Message: Message{
+			sequence: sequence,
+		},
 		FlapsHandle:         float64(data[3]),
 		FlapsPosition:       float64(data[4]),
 		SpeedBrakesHandle:   float64(data[6]),
@@ -33,7 +37,6 @@ func NewTrimFlapsBrakesMessage(data []float32) TrimFlapsBrakesMessage {
 func (m TrimFlapsBrakesMessage) Type() uint {
 	return TrimFlapsBrakesMessageType
 }
-
 
 func (c TrimFlapsBrakesMessage) Data() [8]float32 {
 	return [8]float32{

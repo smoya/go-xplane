@@ -15,11 +15,15 @@
 package messages
 
 type EngineRPMMessage struct {
+	Message
 	RPM float64
 }
 
-func NewEngineRPMMessage(data []float32) EngineRPMMessage {
+func NewEngineRPMMessage(sequence uint64, data []float32) EngineRPMMessage {
 	return EngineRPMMessage{
+		Message: Message{
+			sequence: sequence,
+		},
 		RPM: float64(data[0]),
 	}
 }

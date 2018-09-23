@@ -15,6 +15,7 @@
 package messages
 
 type LocVelDistTraveledMessage struct {
+	Message
 	X  float64
 	Y  float64
 	Z  float64
@@ -23,8 +24,11 @@ type LocVelDistTraveledMessage struct {
 	Zv float64
 }
 
-func NewLocVelDistTraveledMessage(data []float32) LocVelDistTraveledMessage {
+func NewLocVelDistTraveledMessage(sequence uint64, data []float32) LocVelDistTraveledMessage {
 	return LocVelDistTraveledMessage{
+		Message: Message{
+			sequence: sequence,
+		},
 		Y:  float64(data[0]),
 		Z:  -float64(data[1]),
 		X:  -float64(data[2]),
